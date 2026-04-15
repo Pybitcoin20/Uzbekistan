@@ -17,8 +17,24 @@
 }
 
 @layer base {
+  :root {
+    --bg-main: #F2F2F2;
+    --text-main: #141414;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --card-bg: #FFFFFF;
+  }
+
+  .dark {
+    --bg-main: #0A0A0A;
+    --text-main: #F2F2F2;
+    --glass-bg: rgba(20, 20, 20, 0.7);
+    --card-bg: #141414;
+  }
+
   body {
-    @apply bg-cotton text-ink font-sans antialiased;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    @apply font-sans antialiased transition-colors duration-300;
   }
 
   h1, h2, h3, h4 {
@@ -31,8 +47,18 @@
   background-size: 24px 24px;
 }
 
+.dark .uzbek-pattern {
+  background-image: radial-gradient(circle at 2px 2px, rgba(212, 175, 55, 0.05) 1px, transparent 0);
+}
+
 .glass {
-  @apply bg-white/70 backdrop-blur-md border border-white/20;
+  background-color: var(--glass-bg);
+  @apply backdrop-blur-md border border-white/20 dark:border-white/10;
+}
+
+.card {
+  background-color: var(--card-bg);
+  @apply rounded-3xl border border-gray-100 dark:border-white/5;
 }
 
 .silk-gradient {

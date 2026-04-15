@@ -23,7 +23,7 @@ export default function FeaturedLocations() {
   ];
 
   return (
-    <section id="explore" className="py-24 bg-cotton">
+    <section id="explore" className="py-24 bg-cotton dark:bg-black transition-colors duration-300">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div className="max-w-2xl">
@@ -31,10 +31,10 @@ export default function FeaturedLocations() {
               <span className="w-8 h-px bg-samarkand" />
               {t('explore')}
             </div>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold leading-tight">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold leading-tight dark:text-white">
               Timeless <span className="text-samarkand italic">Heritage</span> Sites
             </h2>
-            <p className="mt-4 text-gray-500 font-light max-w-lg">
+            <p className="mt-4 text-gray-500 dark:text-white/40 font-light max-w-lg">
               Explore the most iconic historical monuments, vibrant bazaars, and breathtaking natural wonders of Uzbekistan in stunning 4K detail.
             </p>
           </div>
@@ -48,7 +48,7 @@ export default function FeaturedLocations() {
                 className={`px-6 py-3 rounded-2xl text-xs font-bold uppercase tracking-widest transition-all border ${
                   activeCategory === cat.id 
                     ? 'bg-samarkand text-white border-samarkand shadow-lg shadow-samarkand/20' 
-                    : 'bg-white text-gray-400 border-gray-100 hover:border-samarkand hover:text-samarkand'
+                    : 'bg-white dark:bg-white/5 text-gray-400 border-gray-100 dark:border-white/10 hover:border-samarkand hover:text-samarkand'
                 }`}
               >
                 {cat.label}

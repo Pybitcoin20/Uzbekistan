@@ -20,7 +20,7 @@ export default function LocationCard({ location, onSave, isSaved }: Props) {
   return (
     <motion.div
       whileHover={{ y: -5 }}
-      className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100"
+      className="group bg-white dark:bg-white/5 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100 dark:border-white/10"
     >
       <Link to={detailsLink}>
         <div className="relative aspect-[4/3] overflow-hidden">
@@ -44,7 +44,7 @@ export default function LocationCard({ location, onSave, isSaved }: Props) {
             </button>
           </div>
           <div className="absolute bottom-4 left-4">
-            <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-bold uppercase tracking-widest text-samarkand">
+            <span className="px-3 py-1 rounded-full bg-white/90 dark:bg-black/80 backdrop-blur-md text-[10px] font-bold uppercase tracking-widest text-samarkand dark:text-silk">
               {t(`categories.${location.category}`)}
             </span>
           </div>
@@ -54,7 +54,7 @@ export default function LocationCard({ location, onSave, isSaved }: Props) {
       <div className="p-6">
         <Link to={detailsLink}>
           <div className="flex items-start justify-between mb-2">
-            <h3 className="font-serif font-bold text-xl group-hover:text-samarkand transition-colors">
+            <h3 className="font-serif font-bold text-xl group-hover:text-samarkand dark:group-hover:text-silk transition-colors dark:text-white">
               {location.name}
             </h3>
             <div className="flex items-center gap-1 bg-silk/10 px-2 py-1 rounded-lg">
@@ -64,23 +64,23 @@ export default function LocationCard({ location, onSave, isSaved }: Props) {
           </div>
         </Link>
 
-        <div className="flex items-center gap-1 text-gray-400 text-xs mb-4">
+        <div className="flex items-center gap-1 text-gray-400 dark:text-white/40 text-xs mb-4">
           <MapPin className="w-3 h-3" />
           <span>{location.city}, Uzbekistan</span>
         </div>
 
-        <p className="text-gray-500 text-sm line-clamp-2 mb-6 font-light leading-relaxed">
+        <p className="text-gray-500 dark:text-white/40 text-sm line-clamp-2 mb-6 font-light leading-relaxed">
           {location.description}
         </p>
 
         <div className="flex items-center justify-between">
           <div className="flex flex-col">
-            <span className="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Starting from</span>
-            <span className="font-bold text-samarkand">$45</span>
+            <span className="text-[10px] uppercase tracking-widest text-gray-400 dark:text-white/30 font-bold">Starting from</span>
+            <span className="font-bold text-samarkand dark:text-silk">$45</span>
           </div>
           <Link 
             to={detailsLink}
-            className="flex items-center gap-1 text-sm font-bold text-samarkand group-hover:gap-2 transition-all"
+            className="flex items-center gap-1 text-sm font-bold text-samarkand dark:text-silk group-hover:gap-2 transition-all"
           >
             {t('book')}
             <ArrowUpRight className="w-4 h-4" />
