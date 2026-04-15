@@ -89,7 +89,7 @@ service cloud.firestore {
              data.uid == request.auth.uid &&
              isValidEmail(data.email) &&
              data.role in ['user', 'admin'] &&
-             (data.preferredLanguage == null || data.preferredLanguage in ['en', 'ru', 'uz']);
+             (data.preferredLanguage == null || data.preferredLanguage in ['en', 'ru', 'uz', 'tr', 'es', 'zh', 'ar']);
     }
 
     function isValidLocation(data) {

@@ -1,9 +1,20 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { motion } from 'motion/react';
-import { Search, MapPin, ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Search, MapPin, ArrowRight, Sparkles, Loader2 } from 'lucide-react';
+import { getSmartRecommendation } from '../services/geminiService';
 
 export default function Hero() {
   const { t } = useTranslation();
+  const [recommendation, setRecommendation] = useState<string | null>(null);
+  const [loadingRec, setLoadingRec] = useState(false);
+
+  const handleGetRec = async () => {
+    setLoadingRec(true);
+    const rec = await getSmartRecommendation("Tashkent City Center");
+    setRecommendation(rec);
+    setLoadingRec(false);
+  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
@@ -71,8 +82,35 @@ export default function Hero() {
               </button>
             </div>
             
+            {/* AI Recommendation Button */}
+            <div className="mt-8">
+              <button 
+                onClick={handleGetRec}
+                disabled={loadingRec}
+                className="group relative px-6 py-3 rounded-2xl bg-white border border-samarkand/20 text-samarkand text-xs font-bold uppercase tracking-widest flex items-center gap-2 mx-auto hover:bg-samarkand hover:text-white transition-all shadow-lg"
+              >
+                {loadingRec ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+                Get Smart Recommendation
+              </button>
+              
+              <AnimatePresence>
+                {recommendation && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="mt-6 p-4 glass rounded-2xl border-samarkand/10 max-w-md mx-auto"
+                  >
+                    <p className="text-sm text-gray-600 font-light italic">
+                      "{recommendation}"
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+            
             {/* Quick Suggestions */}
-            <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
               {['Registan', 'Itchan Kala', 'Chorsu Bazaar', 'Plov Center'].map((tag) => (
                 <button key={tag} className="px-4 py-2 rounded-full bg-white border border-gray-100 text-xs font-medium text-gray-500 hover:border-samarkand hover:text-samarkand transition-all cursor-pointer">
                   {tag}

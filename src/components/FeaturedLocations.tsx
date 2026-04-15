@@ -5,6 +5,18 @@ import { motion } from 'motion/react';
 
 const LOCATIONS: Location[] = [
   {
+    id: 'imam-al-bukhari',
+    name: 'Imam Al-Bukhari Complex',
+    description: 'The final resting place of the great Islamic scholar Imam Al-Bukhari, featuring a magnificent blue-domed mausoleum and a world-class library.',
+    category: 'monument',
+    city: 'Samarkand',
+    lat: 39.8122,
+    lng: 66.9389,
+    rating: 4.9,
+    reviewCount: 12450,
+    images: ['https://picsum.photos/seed/bukhari1/800/600']
+  },
+  {
     id: '1',
     name: 'Registan Square',
     description: 'The heart of the ancient city of Samarkand of the Timurid dynasty, with three madrasahs of distinctive Islamic architecture.',
@@ -27,18 +39,6 @@ const LOCATIONS: Location[] = [
     rating: 4.8,
     reviewCount: 850,
     images: ['https://picsum.photos/seed/khiva/800/600']
-  },
-  {
-    id: '3',
-    name: 'Chorsu Bazaar',
-    description: 'The traditional bazaar located in the center of the old town of Tashkent. Under its blue-colored dome, all daily necessities are sold.',
-    category: 'bazaar',
-    city: 'Tashkent',
-    lat: 41.3269,
-    lng: 69.2361,
-    rating: 4.7,
-    reviewCount: 2100,
-    images: ['https://picsum.photos/seed/chorsu/800/600']
   }
 ];
 
