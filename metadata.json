@@ -1,0 +1,6 @@
+{
+  "name": "Uzbekistan Heritage & Smart Travel Ecosystem",
+  "description": "A premium, full-stack tourism platform for exploring Uzbekistan with smart location features, cultural insights, and real-time services.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["Smart Search", "Interactive Maps", "Plov Radar", "Cultural Guide"]
+}

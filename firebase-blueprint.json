@@ -1,0 +1,100 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user information and preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "photoURL": { "type": "string", "format": "uri" },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "preferredLanguage": { "type": "string", "enum": ["en", "ru", "uz"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Location": {
+      "title": "Travel Location",
+      "description": "A point of interest in Uzbekistan",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string", "enum": ["monument", "restaurant", "hotel", "museum", "bazaar"] },
+        "city": { "type": "string", "enum": ["Tashkent", "Samarkand", "Bukhara", "Khiva", "Nukus"] },
+        "lat": { "type": "number" },
+        "lng": { "type": "number" },
+        "rating": { "type": "number" },
+        "reviewCount": { "type": "number" },
+        "images": { "type": "array", "items": { "type": "string", "format": "uri" } },
+        "plovScore": { "type": "number", "description": "Ranking for Plov Radar (0-10)" },
+        "bestTime": { "type": "string", "description": "Morning or Lunch for Plov" }
+      },
+      "required": ["name", "category", "city", "lat", "lng"]
+    },
+    "Review": {
+      "title": "Location Review",
+      "description": "User reviews for locations",
+      "type": "object",
+      "properties": {
+        "locationId": { "type": "string" },
+        "uid": { "type": "string" },
+        "userName": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["locationId", "uid", "rating"]
+    },
+    "Booking": {
+      "title": "Travel Booking",
+      "description": "Hotel or restaurant bookings",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "locationId": { "type": "string" },
+        "locationName": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "time": { "type": "string" },
+        "guests": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "cancelled"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "locationId", "date", "guests", "status"]
+    },
+    "SavedPlace": {
+      "title": "Saved Place",
+      "description": "User's favorite locations",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "locationId": { "type": "string" },
+        "locationName": { "type": "string" },
+        "category": { "type": "string" },
+        "savedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "locationId"]
+    },
+    "CulturalTip": {
+      "title": "Cultural Tip",
+      "description": "Dos and Don'ts for visitors",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "category": { "type": "string", "enum": ["etiquette", "legal", "negotiation", "safety"] }
+      },
+      "required": ["title", "content", "category"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": { "schema": "UserProfile", "description": "User profiles" },
+    "/locations/{locationId}": { "schema": "Location", "description": "Travel locations" },
+    "/locations/{locationId}/reviews/{reviewId}": { "schema": "Review", "description": "Location reviews" },
+    "/bookings/{bookingId}": { "schema": "Booking", "description": "User bookings" },
+    "/users/{uid}/saved_places/{saveId}": { "schema": "SavedPlace", "description": "User favorites" },
+    "/cultural_tips/{tipId}": { "schema": "CulturalTip", "description": "Cultural and legal tips" }
+  }
+}
