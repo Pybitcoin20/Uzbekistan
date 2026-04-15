@@ -1,80 +1,77 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import LocationCard from './LocationCard';
-import { Location } from '../types';
-import { motion } from 'motion/react';
-
-const LOCATIONS: Location[] = [
-  {
-    id: 'imam-al-bukhari',
-    name: 'Imam Al-Bukhari Complex',
-    description: 'The final resting place of the great Islamic scholar Imam Al-Bukhari, featuring a magnificent blue-domed mausoleum and a world-class library.',
-    category: 'monument',
-    city: 'Samarkand',
-    lat: 39.8122,
-    lng: 66.9389,
-    rating: 4.9,
-    reviewCount: 12450,
-    images: ['https://picsum.photos/seed/bukhari1/800/600']
-  },
-  {
-    id: '1',
-    name: 'Registan Square',
-    description: 'The heart of the ancient city of Samarkand of the Timurid dynasty, with three madrasahs of distinctive Islamic architecture.',
-    category: 'monument',
-    city: 'Samarkand',
-    lat: 39.6548,
-    lng: 66.9757,
-    rating: 4.9,
-    reviewCount: 1240,
-    images: ['https://picsum.photos/seed/registan/800/600']
-  },
-  {
-    id: '2',
-    name: 'Itchan Kala',
-    description: 'The walled inner town of the city of Khiva, Uzbekistan. Since 1990, it has been protected as a World Heritage Site.',
-    category: 'monument',
-    city: 'Khiva',
-    lat: 41.3783,
-    lng: 60.3639,
-    rating: 4.8,
-    reviewCount: 850,
-    images: ['https://picsum.photos/seed/khiva/800/600']
-  }
-];
+import { Category } from '../types';
+import { motion, AnimatePresence } from 'motion/react';
+import { ALL_LOCATIONS } from '../data/locations';
+import { MapPin, Filter } from 'lucide-react';
 
 export default function FeaturedLocations() {
   const { t } = useTranslation();
+  const [activeCategory, setActiveCategory] = useState<Category | 'all'>('all');
+
+  const filteredLocations = activeCategory === 'all' 
+    ? ALL_LOCATIONS 
+    : ALL_LOCATIONS.filter(loc => loc.category === activeCategory);
+
+  const categories: { id: Category | 'all'; label: string }[] = [
+    { id: 'all', label: 'All Places' },
+    { id: 'monument', label: 'Monuments' },
+    { id: 'bazaar', label: 'Bazaars' },
+    { id: 'nature', label: 'Nature' },
+    { id: 'museum', label: 'Museums' }
+  ];
 
   return (
-    <section className="py-24 bg-cotton">
+    <section id="explore" className="py-24 bg-cotton">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 text-samarkand font-bold text-xs uppercase tracking-[0.2em] mb-4">
               <span className="w-8 h-px bg-samarkand" />
               {t('explore')}
             </div>
             <h2 className="text-4xl md:text-5xl font-serif font-bold leading-tight">
-              Must-Visit <span className="text-samarkand italic">Heritage</span> Sites
+              Timeless <span className="text-samarkand italic">Heritage</span> Sites
             </h2>
+            <p className="mt-4 text-gray-500 font-light max-w-lg">
+              Explore the most iconic historical monuments, vibrant bazaars, and breathtaking natural wonders of Uzbekistan in stunning 4K detail.
+            </p>
           </div>
-          <button className="px-8 py-4 rounded-2xl border border-gray-200 font-bold text-sm hover:border-samarkand hover:text-samarkand transition-all">
-            View All Places
-          </button>
+
+          {/* Category Filter */}
+          <div className="flex flex-wrap gap-2">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`px-6 py-3 rounded-2xl text-xs font-bold uppercase tracking-widest transition-all border ${
+                  activeCategory === cat.id 
+                    ? 'bg-samarkand text-white border-samarkand shadow-lg shadow-samarkand/20' 
+                    : 'bg-white text-gray-400 border-gray-100 hover:border-samarkand hover:text-samarkand'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {LOCATIONS.map((loc, index) => (
-            <motion.div
-              key={loc.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <LocationCard location={loc} />
-            </motion.div>
-          ))}
+          <AnimatePresence mode="popLayout">
+            {filteredLocations.map((loc, index) => (
+              <motion.div
+                key={loc.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+              >
+                <LocationCard location={loc} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </div>
     </section>

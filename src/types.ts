@@ -1,5 +1,5 @@
-export type Category = "monument" | "restaurant" | "hotel" | "museum" | "bazaar";
-export type City = "Tashkent" | "Samarkand" | "Bukhara" | "Khiva" | "Nukus";
+export type Category = "monument" | "restaurant" | "hotel" | "museum" | "bazaar" | "nature" | "modern";
+export type City = "Tashkent" | "Samarkand" | "Bukhara" | "Khiva" | "Nukus" | "Shakhrisabz" | "Termez" | "Karakalpakstan" | "Tashkent Region";
 export type Language = "en" | "ru" | "uz";
 
 export interface UserProfile {
