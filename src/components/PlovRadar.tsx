@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Utensils, Clock, MapPin, Star, Trophy } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Utensils, Clock, MapPin, Star, Trophy, Share2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import ShareCard from './ShareCard';
 
 const PLOV_PLACES = [
   {
@@ -39,6 +40,7 @@ const PLOV_PLACES = [
 export default function PlovRadar() {
   const { t } = useTranslation();
   const [selectedCity, setSelectedCity] = useState('All');
+  const [sharingPlace, setSharingPlace] = useState<any>(null);
 
   const filteredPlaces = selectedCity === 'All' 
     ? PLOV_PLACES 
@@ -142,6 +144,14 @@ export default function PlovRadar() {
                         <p className="font-medium text-gray-800 text-sm">{place.specialty}</p>
                       </div>
                     </div>
+                    
+                    <button 
+                      onClick={() => setSharingPlace(place)}
+                      className="w-full mt-4 flex items-center justify-center gap-2 py-3 bg-gray-50 hover:bg-gray-100 dark:bg-white/5 dark:hover:bg-white/10 text-gray-600 dark:text-white/60 rounded-xl text-xs font-bold uppercase tracking-widest transition-colors"
+                    >
+                      <Share2 className="w-4 h-4" />
+                      Do'stlar bilan ulashish
+                    </button>
                   </div>
                 </div>
               </div>
@@ -149,6 +159,30 @@ export default function PlovRadar() {
           ))}
         </div>
       </div>
+
+      <AnimatePresence>
+        {sharingPlace && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSharingPlace(null)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            />
+            <div className="relative">
+              <ShareCard 
+                title={sharingPlace.name}
+                description={`${sharingPlace.city} shahridagi eng mazali ${sharingPlace.specialty}!`}
+                image={sharingPlace.image}
+                url={window.location.href}
+                type="plov"
+                score={sharingPlace.score}
+              />
+            </div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

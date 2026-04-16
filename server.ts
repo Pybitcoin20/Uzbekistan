@@ -13,6 +13,11 @@ import locationRoutes from "./server/routes/locationRoutes";
 import paymentRoutes from "./server/routes/paymentRoutes";
 import plannerRoutes from "./server/routes/plannerRoutes";
 import authRoutes from "./server/routes/authRoutes";
+import billingRoutes from "./server/routes/billingRoutes";
+import bookingRoutes from "./server/routes/bookingRoutes";
+import profileRoutes from "./server/routes/profileRoutes";
+import vendorRoutes from "./server/routes/vendorRoutes";
+import referralRoutes from "./server/routes/referralRoutes";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,6 +28,9 @@ async function startServer() {
 
   const app = express();
   const PORT = 3000;
+
+  // Webhook route must be BEFORE express.json() for raw body
+  app.use("/api/billing/webhook", billingRoutes);
 
   // Global Middleware
   app.use(express.json());
@@ -52,6 +60,11 @@ async function startServer() {
   });
 
   app.use("/api/auth", authRoutes);
+  app.use("/api/billing", billingRoutes);
+  app.use("/api/bookings", bookingRoutes);
+  app.use("/api/profile", profileRoutes);
+  app.use("/api/vendor", vendorRoutes);
+  app.use("/api/referrals", referralRoutes);
   app.use("/api/locations", locationRoutes);
   app.use("/api/payments", paymentRoutes);
   app.use("/api/planner", plannerRoutes);

@@ -58,6 +58,35 @@ export default function Hero() {
             <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
               {t('discover_uzbekistan')}
             </p>
+
+            {/* Social Proof */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="flex items-center justify-center gap-8 mb-12"
+            >
+              <div className="flex -space-x-3">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
+                    <img src={`https://picsum.photos/seed/user${i}/40/40`} alt="User" referrerPolicy="no-referrer" />
+                  </div>
+                ))}
+                <div className="w-10 h-10 rounded-full border-2 border-white bg-samarkand flex items-center justify-center text-[10px] text-white font-bold">
+                  +1k
+                </div>
+              </div>
+              <div className="text-left">
+                <div className="flex gap-0.5 mb-1">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <Sparkles key={i} className="w-3 h-3 text-yellow-500 fill-current" />
+                  ))}
+                </div>
+                <p className="text-xs font-bold text-gray-900 uppercase tracking-widest">
+                  1,200+ Sayohatlar rejalashtirildi
+                </p>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Smart Search Bar */}

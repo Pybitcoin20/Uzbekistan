@@ -20,6 +20,7 @@ const registerSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8).regex(/[A-Z]/, 'Katta harf bo\'lishi kerak').regex(/[0-9]/, 'Raqam bo\'lishi kerak'),
   displayName: z.string().optional(),
+  referralCode: z.string().optional(),
 });
 
 const loginSchema = z.object({
@@ -52,11 +53,20 @@ const generateTokens = async (user: any, req: any) => {
 // Register
 router.post('/register', async (req, res) => {
   try {
-    const { email, password, displayName } = registerSchema.parse(req.body);
+    const { email, password, displayName, referralCode } = registerSchema.parse(req.body);
 
     const existingUser = await query('SELECT * FROM users WHERE email = $1', [email]);
     if (existingUser.rows.length > 0) {
       return res.status(400).json({ error: 'User already exists' });
+    }
+
+    // Check referral code
+    let referredBy = null;
+    if (referralCode) {
+      const referrer = await query('SELECT id FROM users WHERE referral_code = $1', [referralCode]);
+      if (referrer.rows.length > 0) {
+        referredBy = referrer.rows[0].id;
+      }
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -64,14 +74,20 @@ router.post('/register', async (req, res) => {
 
     const role = email === 'crazyaivodeos@gmail.com' ? 'admin' : 'user';
     const result = await query(
-      'INSERT INTO users (email, password, display_name, role, verification_token) VALUES ($1, $2, $3, $4, $5) RETURNING id, email, role, display_name',
-      [email, hashedPassword, displayName, role, verificationToken]
+      'INSERT INTO users (email, password, display_name, role, verification_token, referred_by) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id, email, role, display_name',
+      [email, hashedPassword, displayName, role, verificationToken, referredBy]
     );
 
     const user = result.rows[0];
     
+    // Reward referrer if exists
+    if (referredBy) {
+      await query('UPDATE users SET points = points + 500 WHERE id = $1', [referredBy]);
+      await query('INSERT INTO points_history (user_id, points, reason) VALUES ($1, $2, $3)', [referredBy, 500, 'referral_reward']);
+    }
+
     await sendVerificationEmail(email, verificationToken);
-    await logAudit(user.id, 'user_registered', { email }, req);
+    await logAudit(user.id, 'user_registered', { email, referredBy }, req);
 
     res.status(201).json({ 
       message: 'Ro\'yxatdan o\'tdingiz. Emailingizni tasdiqlang.',

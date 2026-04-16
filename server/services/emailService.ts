@@ -47,3 +47,30 @@ export async function sendPasswordResetEmail(email: string, token: string) {
     `,
   });
 }
+
+export async function sendWelcomeEmail(email: string, displayName: string) {
+  await transporter.sendMail({
+    from: '"Uzbekistan Heritage" <no-reply@uzheritage.uz>',
+    to: email,
+    subject: 'Xush kelibsiz, ' + displayName + '!',
+    html: `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #eee; border-radius: 16px; overflow: hidden;">
+        <div style="background: linear-gradient(to right, #0047AB, #002D62); padding: 40px; text-align: center; color: white;">
+          <h1 style="margin: 0; font-size: 24px;">Uzbekistan Heritage</h1>
+        </div>
+        <div style="padding: 40px;">
+          <h2>Assalomu alaykum, ${displayName}!</h2>
+          <p>Sizni O'zbekistonning boy madaniy merosi va zamonaviy sayohat ekotizimida ko'rib turganimizdan juda mamnunmiz.</p>
+          <p>Siz endi quyidagi imkoniyatlardan foydalanishingiz mumkin:</p>
+          <ul>
+            <li>AI orqali aqlli sayohat rejalarini tuzish</li>
+            <li>Jonli Plov Radaridan foydalanish</li>
+            <li>Tarixiy obidalarni xaritada o'rganish</li>
+          </ul>
+          <p>Sayohatni hoziroq boshlang!</p>
+          <a href="${process.env.APP_URL}" style="display: inline-block; padding: 12px 24px; background-color: #0047AB; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">Platformaga o'tish</a>
+        </div>
+      </div>
+    `,
+  });
+}

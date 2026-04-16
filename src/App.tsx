@@ -16,9 +16,13 @@ import ExploreMap from './components/ExploreMap';
 import AITripPlanner from './components/AITripPlanner';
 import PlovRadar from './components/PlovRadar';
 import CulturalGuide from './components/CulturalGuide';
+import Testimonials from './components/Testimonials';
 import ErrorBoundary from './components/ErrorBoundary';
 import ImamAlBukhariPage from './components/ImamAlBukhariPage';
 import AdminDashboard from './components/AdminDashboard';
+import Profile from './pages/Profile';
+import Premium from './pages/Premium';
+import VendorDashboard from './pages/VendorDashboard';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -49,6 +53,9 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/locations/imam-al-bukhari" element={<ImamAlBukhariPage />} />
+        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="/premium" element={<Premium />} />
+        <Route path="/vendor" element={<ProtectedRoute><VendorDashboard /></ProtectedRoute>} />
         <Route 
           path="/admin" 
           element={
@@ -123,6 +130,7 @@ function HomePage() {
       <AITripPlanner />
       <PlovRadar />
       <CulturalGuide />
+      <Testimonials />
     </main>
   );
 }

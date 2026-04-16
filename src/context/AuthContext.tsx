@@ -6,6 +6,8 @@ interface User {
   display_name?: string;
   photo_url?: string;
   role: string;
+  tier: 'free' | 'premium';
+  points: number;
   is_verified?: boolean;
 }
 
@@ -24,7 +26,7 @@ interface AuthContextType {
   openAuthModal: () => void;
   closeAuthModal: () => void;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, displayName?: string) => Promise<void>;
+  register: (email: string, password: string, displayName?: string, referralCode?: string) => Promise<void>;
   logout: () => Promise<void>;
   fetchSessions: () => Promise<void>;
   logoutAll: () => Promise<void>;
@@ -108,10 +110,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     closeAuthModal();
   };
 
-  const register = async (email: string, password: string, displayName?: string) => {
+  const register = async (email: string, password: string, displayName?: string, referralCode?: string) => {
     const res = await secureFetch('/api/auth/register', {
       method: 'POST',
-      body: JSON.stringify({ email, password, displayName }),
+      body: JSON.stringify({ email, password, displayName, referralCode }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Registration failed');

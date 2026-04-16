@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import { cacheService } from '../services/cacheService';
 import { generateItinerary } from '../../src/services/geminiService';
+import { authenticateToken, checkUsageLimit } from '../middleware/auth';
 
 const router = Router();
 
-router.post('/generate', async (req, res) => {
+router.post('/generate', authenticateToken, checkUsageLimit, async (req, res) => {
   const { days, interests } = req.body;
   const cacheKey = cacheService.keys.aiItinerary(days, interests.join(','));
 
