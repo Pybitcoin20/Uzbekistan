@@ -41,7 +41,7 @@ function AppContent() {
   const { isAuthModalOpen, closeAuthModal } = useAuth();
 
   return (
-    <div className="min-h-screen bg-cotton dark:bg-black selection:bg-samarkand/20 selection:text-samarkand transition-colors duration-300">
+    <div className="min-h-screen bg-cotton dark:bg-zinc-950 selection:bg-samarkand/20 selection:text-samarkand transition-colors duration-300">
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 silk-gradient z-[60] origin-left"

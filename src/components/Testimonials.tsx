@@ -34,7 +34,7 @@ export default function Testimonials() {
           <h2 className="text-4xl md:text-5xl font-serif font-bold dark:text-white mb-4">
             Sayohatlarimiz haqida <span className="text-samarkand italic">fikrlar</span>
           </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">
+          <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
             Minglab baxtli sayohatchilar va hamkorlarimizning samimiy e'tiroflari.
           </p>
         </div>

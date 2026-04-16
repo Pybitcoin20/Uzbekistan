@@ -51,11 +51,11 @@ export default function Hero() {
             <span className="inline-block px-4 py-1.5 rounded-full bg-samarkand/5 text-samarkand text-xs font-bold tracking-widest uppercase mb-6 border border-samarkand/10">
               {t('modern_silk_road')}
             </span>
-            <h1 className="text-6xl md:text-8xl font-serif font-bold mb-8 leading-[0.9] tracking-tighter">
+            <h1 className="text-6xl md:text-8xl font-serif font-bold mb-8 leading-[0.9] tracking-tighter dark:text-white">
               {t('welcome')} <br />
               <span className="text-samarkand italic">Uzbekistan</span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
               {t('discover_uzbekistan')}
             </p>
 
@@ -82,7 +82,7 @@ export default function Hero() {
                     <Sparkles key={i} className="w-3 h-3 text-yellow-500 fill-current" />
                   ))}
                 </div>
-                <p className="text-xs font-bold text-gray-900 uppercase tracking-widest">
+                <p className="text-xs font-bold text-gray-900 dark:text-white uppercase tracking-widest">
                   1,200+ Sayohatlar rejalashtirildi
                 </p>
               </div>
@@ -116,7 +116,7 @@ export default function Hero() {
               <button 
                 onClick={handleGetRec}
                 disabled={loadingRec}
-                className="group relative px-6 py-3 rounded-2xl bg-white border border-samarkand/20 text-samarkand text-xs font-bold uppercase tracking-widest flex items-center gap-2 mx-auto hover:bg-samarkand hover:text-white transition-all shadow-lg"
+                className="group relative px-6 py-3 rounded-2xl bg-white dark:bg-zinc-900 border border-samarkand/20 text-samarkand text-xs font-bold uppercase tracking-widest flex items-center gap-2 mx-auto hover:bg-samarkand hover:text-white transition-all shadow-lg"
               >
                 {loadingRec ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
                 Get Smart Recommendation
@@ -130,7 +130,7 @@ export default function Hero() {
                     exit={{ opacity: 0, y: 10 }}
                     className="mt-6 p-4 glass rounded-2xl border-samarkand/10 max-w-md mx-auto"
                   >
-                    <p className="text-sm text-gray-600 font-light italic">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 font-light italic">
                       "{recommendation}"
                     </p>
                   </motion.div>
@@ -141,7 +141,7 @@ export default function Hero() {
             {/* Quick Suggestions */}
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               {['Registan', 'Itchan Kala', 'Chorsu Bazaar', 'Plov Center'].map((tag) => (
-                <button key={tag} className="px-4 py-2 rounded-full bg-white border border-gray-100 text-xs font-medium text-gray-500 hover:border-samarkand hover:text-samarkand transition-all cursor-pointer">
+                <button key={tag} className="px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 text-xs font-medium text-gray-500 dark:text-gray-400 hover:border-samarkand hover:text-samarkand transition-all cursor-pointer">
                   {tag}
                 </button>
               ))}

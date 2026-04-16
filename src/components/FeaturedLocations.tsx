@@ -23,7 +23,7 @@ export default function FeaturedLocations() {
   ];
 
   return (
-    <section id="explore" className="py-24 bg-cotton dark:bg-black transition-colors duration-300">
+    <section id="explore" className="py-24 bg-cotton dark:bg-zinc-950 transition-colors duration-300">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div className="max-w-2xl">

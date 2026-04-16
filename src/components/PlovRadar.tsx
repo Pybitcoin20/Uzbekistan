@@ -47,8 +47,8 @@ export default function PlovRadar() {
     : PLOV_PLACES.filter(p => p.city === selectedCity);
 
   return (
-    <section id="plov" className="py-24 bg-white relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-cotton to-transparent" />
+    <section id="plov" className="py-24 bg-white dark:bg-zinc-950 relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-cotton dark:from-zinc-900 to-transparent" />
       
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -57,20 +57,20 @@ export default function PlovRadar() {
               <Utensils className="w-4 h-4" />
               {t('plov_radar')}
             </div>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold leading-tight">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold leading-tight dark:text-white">
               The Ultimate <span className="text-samarkand italic">Plov</span> Ranking
             </h2>
-            <p className="text-gray-500 mt-4 font-light">
+            <p className="text-gray-500 dark:text-gray-400 mt-4 font-light">
               Uzbekistan's national dish is an art form. We've ranked the best places based on authenticity, timing, and regional style.
             </p>
           </div>
-          <div className="flex gap-2 bg-cotton p-1 rounded-2xl">
+          <div className="flex gap-2 bg-cotton dark:bg-white/5 p-1 rounded-2xl">
             {['All', 'Tashkent', 'Samarkand', 'Bukhara'].map(city => (
               <button 
                 key={city} 
                 onClick={() => setSelectedCity(city)}
                 className={`px-6 py-2 rounded-xl text-sm font-medium transition-all ${
-                  selectedCity === city ? 'bg-white shadow-sm text-samarkand' : 'text-gray-500 hover:text-samarkand'
+                  selectedCity === city ? 'bg-white dark:bg-zinc-800 shadow-sm text-samarkand' : 'text-gray-500 dark:text-gray-400 hover:text-samarkand'
                 }`}
               >
                 {city}
@@ -100,7 +100,7 @@ export default function PlovRadar() {
                 </div>
               )}
               
-              <div className="bg-cotton rounded-3xl overflow-hidden border border-gray-100 group-hover:shadow-2xl group-hover:shadow-samarkand/10 transition-all">
+              <div className="bg-cotton dark:bg-zinc-900 rounded-3xl overflow-hidden border border-gray-100 dark:border-white/10 group-hover:shadow-2xl group-hover:shadow-samarkand/10 transition-all">
                 <div className="aspect-video relative overflow-hidden">
                   <img src={place.image} alt={place.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -121,17 +121,17 @@ export default function PlovRadar() {
                 <div className="p-6">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between text-sm">
-                      <div className="flex items-center gap-2 text-gray-500">
+                      <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
                         <MapPin className="w-4 h-4 text-samarkand" />
                         {place.city}
                       </div>
-                      <div className="flex items-center gap-2 text-gray-500">
+                      <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
                         <Clock className="w-4 h-4 text-samarkand" />
                         {place.bestTime}
                       </div>
                     </div>
                     
-                    <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-white/10">
                       <div>
                         <span className="text-[10px] uppercase tracking-widest text-gray-400 font-bold block mb-1">Status</span>
                         <p className={`font-bold text-sm ${
@@ -141,7 +141,7 @@ export default function PlovRadar() {
                       </div>
                       <div className="text-right">
                         <span className="text-[10px] uppercase tracking-widest text-gray-400 font-bold block mb-1">Signature</span>
-                        <p className="font-medium text-gray-800 text-sm">{place.specialty}</p>
+                        <p className="font-medium text-gray-800 dark:text-gray-200 text-sm">{place.specialty}</p>
                       </div>
                     </div>
                     

@@ -1,14 +1,15 @@
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher';
 import AuthButton from './AuthButton';
-import { Map, Compass, Utensils, BookOpen, User, Sun, Moon, Settings } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
+import { Map, Compass, Utensils, BookOpen, User, Settings } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../hooks/useAuth';
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   const { t } = useTranslation();
-  const { theme, toggleTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const { user } = useAuth();
 
   const isAdmin = user?.role === 'admin';
@@ -83,13 +84,7 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-6">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-white/10 transition-colors text-gray-600 dark:text-white/60"
-            aria-label="Toggle theme"
-          >
-            {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
-          </button>
+          <ThemeToggle />
           <LanguageSwitcher />
           <div className="h-6 w-px bg-gray-200 dark:bg-white/10" />
           <AuthButton />

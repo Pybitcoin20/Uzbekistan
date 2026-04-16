@@ -33,17 +33,17 @@ export default function CulturalGuide() {
   const { t } = useTranslation();
 
   return (
-    <section id="guide" className="py-24 bg-cotton relative">
+    <section id="guide" className="py-24 bg-cotton dark:bg-zinc-950 relative">
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mb-16">
           <div className="flex items-center gap-2 text-samarkand font-bold text-xs uppercase tracking-[0.2em] mb-4">
             <BookOpen className="w-4 h-4" />
             {t('cultural_guide')}
           </div>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold leading-tight">
+          <h2 className="text-4xl md:text-5xl font-serif font-bold leading-tight dark:text-white">
             Travel <span className="text-silk italic">Wisely</span> & Respectfully
           </h2>
-          <p className="text-gray-500 mt-4 font-light">
+          <p className="text-gray-500 dark:text-gray-400 mt-4 font-light">
             Essential knowledge for a smooth journey through the heart of the Silk Road.
           </p>
         </div>
@@ -56,16 +56,16 @@ export default function CulturalGuide() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="glass p-8 rounded-3xl hover:bg-white transition-all group border-none shadow-sm hover:shadow-xl"
+              className="glass p-8 rounded-3xl hover:bg-white dark:hover:bg-zinc-900 transition-all group border-none shadow-sm hover:shadow-xl"
             >
-              <div className="w-12 h-12 rounded-2xl bg-samarkand/5 flex items-center justify-center mb-6 group-hover:bg-samarkand group-hover:text-white transition-all">
+              <div className="w-12 h-12 rounded-2xl bg-samarkand/5 dark:bg-samarkand/10 flex items-center justify-center mb-6 group-hover:bg-samarkand group-hover:text-white transition-all">
                 <tip.icon className="w-6 h-6 text-samarkand group-hover:text-white" />
               </div>
-              <h3 className="font-serif font-bold text-xl mb-4">{tip.title}</h3>
-              <p className="text-gray-500 text-sm font-light leading-relaxed">
+              <h3 className="font-serif font-bold text-xl mb-4 dark:text-white">{tip.title}</h3>
+              <p className="text-gray-500 dark:text-gray-400 text-sm font-light leading-relaxed">
                 {tip.content}
               </p>
-              <div className="mt-6 pt-6 border-t border-gray-100">
+              <div className="mt-6 pt-6 border-t border-gray-100 dark:border-white/10">
                 <span className="text-[10px] uppercase tracking-widest font-bold text-samarkand/40">
                   Category: {tip.category}
                 </span>

@@ -25,10 +25,10 @@
   }
 
   .dark {
-    --bg-main: #0A0A0A;
-    --text-main: #F2F2F2;
-    --glass-bg: rgba(20, 20, 20, 0.7);
-    --card-bg: #141414;
+    --bg-main: #0B1220;
+    --text-main: #E5E7EB;
+    --glass-bg: rgba(11, 18, 32, 0.8);
+    --card-bg: #111827;
   }
 
   body {

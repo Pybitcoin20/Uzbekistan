@@ -32,7 +32,7 @@ export default function LocationCard({ location, onSave, isSaved }: Props) {
   return (
     <motion.div
       whileHover={{ y: -5 }}
-      className="group bg-white dark:bg-white/5 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100 dark:border-white/10"
+      className="group bg-white dark:bg-zinc-900 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100 dark:border-white/10"
     >
       <Link to={detailsLink}>
         <div className="relative aspect-[4/3] overflow-hidden">

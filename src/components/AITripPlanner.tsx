@@ -24,7 +24,7 @@ export default function AITripPlanner() {
   };
 
   return (
-    <section id="planner" className="py-24 bg-white relative overflow-hidden">
+    <section id="planner" className="py-24 bg-white dark:bg-zinc-950 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-96 h-96 bg-samarkand/5 blur-3xl rounded-full -mr-48 -mt-48" />
       
       <div className="container mx-auto px-6">
@@ -34,10 +34,10 @@ export default function AITripPlanner() {
               <Sparkles className="w-4 h-4" />
               AI-Powered Planning
             </div>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 dark:text-white">
               Your Personalized <span className="text-samarkand italic">Silk Road</span> Journey
             </h2>
-            <p className="text-gray-500 font-light max-w-2xl mx-auto">
+            <p className="text-gray-500 dark:text-gray-400 font-light max-w-2xl mx-auto">
               Tell us how long you're staying, and our AI concierge will craft a perfect day-by-day itinerary tailored to Uzbekistan's unique rhythm.
             </p>
           </div>
@@ -52,7 +52,7 @@ export default function AITripPlanner() {
                       key={d}
                       onClick={() => setDays(d)}
                       className={`flex-1 py-3 rounded-2xl font-bold text-sm transition-all ${
-                        days === d ? 'bg-samarkand text-white shadow-lg shadow-samarkand/20' : 'bg-cotton text-gray-500 hover:bg-gray-100'
+                        days === d ? 'bg-samarkand text-white shadow-lg shadow-samarkand/20' : 'bg-cotton dark:bg-white/5 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/10'
                       }`}
                     >
                       {d}
@@ -85,7 +85,7 @@ export default function AITripPlanner() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.1 }}
-                    className="group glass p-8 rounded-3xl hover:bg-white transition-all border-none shadow-sm hover:shadow-xl"
+                    className="group glass p-8 rounded-3xl hover:bg-white dark:hover:bg-zinc-900 transition-all border-none shadow-sm hover:shadow-xl"
                   >
                     <div className="flex items-start gap-6">
                       <div className="w-16 h-16 rounded-2xl silk-gradient flex flex-col items-center justify-center text-white shrink-0">
@@ -93,12 +93,12 @@ export default function AITripPlanner() {
                         <span className="text-2xl font-serif font-bold">{item.day}</span>
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-serif font-bold mb-4 group-hover:text-samarkand transition-colors">
+                        <h3 className="text-xl font-serif font-bold mb-4 group-hover:text-samarkand dark:text-white transition-colors">
                           {item.title}
                         </h3>
                         <ul className="space-y-3">
                           {item.activities.map((act, i) => (
-                            <li key={i} className="flex items-start gap-3 text-sm text-gray-500 font-light">
+                            <li key={i} className="flex items-start gap-3 text-sm text-gray-500 dark:text-gray-400 font-light">
                               <ChevronRight className="w-4 h-4 text-samarkand mt-0.5 shrink-0" />
                               {act}
                             </li>
