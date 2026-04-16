@@ -69,24 +69,24 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className="relative w-full max-w-md bg-white dark:bg-zinc-900 rounded-[2.5rem] shadow-2xl overflow-hidden border border-white/10"
+          className="relative w-full max-w-md bg-white dark:bg-[#111827] rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-200 dark:border-white/5"
         >
           <button 
             onClick={onClose}
-            className="absolute top-6 right-6 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/5 transition-colors text-gray-400"
+            className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-slate-400"
           >
             <X className="w-5 h-5" />
           </button>
 
           <div className="p-8 pt-12">
             <div className="text-center mb-8">
-              <div className="w-16 h-16 silk-gradient rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-samarkand/20">
+              <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-blue-600/20">
                 <span className="text-white font-serif font-bold text-3xl">U</span>
               </div>
-              <h2 className="text-2xl font-serif font-bold dark:text-white">
+              <h2 className="text-2xl font-serif font-bold dark:text-slate-50">
                 {mode === 'login' ? 'Xush kelibsiz' : mode === 'register' ? 'Hisob yaratish' : 'Parolni tiklash'}
               </h2>
-              <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">
+              <p className="text-slate-500 dark:text-slate-400 text-sm mt-2">
                 {mode === 'login' ? 'Tizimga kirish uchun ma\'lumotlaringizni kiriting' : 
                  mode === 'register' ? 'O\'zbekiston bo\'ylab sayohatni biz bilan boshlang' : 
                  'Emailingizni kiriting va biz sizga havola yuboramiz'}
@@ -97,51 +97,51 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               {mode === 'register' && (
                 <>
                   <div className="relative">
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                     <input
                       type="text"
                       required
                       placeholder="To'liq ismingiz"
                       value={displayName}
                       onChange={(e) => setDisplayName(e.target.value)}
-                      className="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-2xl text-sm dark:text-white focus:ring-2 focus:ring-samarkand outline-none transition-all"
+                      className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                     />
                   </div>
                   <div className="relative">
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                     <input
                       type="text"
                       placeholder="Taklif kodi (ixtiyoriy)"
                       value={referralCode}
                       onChange={(e) => setReferralCode(e.target.value)}
-                      className="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-2xl text-sm dark:text-white focus:ring-2 focus:ring-samarkand outline-none transition-all"
+                      className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                     />
                   </div>
                 </>
               )}
 
               <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                 <input
                   type="email"
                   required
                   placeholder="Email manzilingiz"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-2xl text-sm dark:text-white focus:ring-2 focus:ring-samarkand outline-none transition-all"
+                  className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                 />
               </div>
 
               {mode !== 'forgot' && (
                 <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                   <input
                     type="password"
                     required
                     placeholder="Parol"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-2xl text-sm dark:text-white focus:ring-2 focus:ring-samarkand outline-none transition-all"
+                    className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                   />
                 </div>
               )}
@@ -171,7 +171,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full silk-gradient text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform active:scale-95 shadow-lg shadow-samarkand/20 disabled:opacity-50 disabled:scale-100"
+                className="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20 disabled:opacity-50 disabled:scale-100"
               >
                 {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : (
                   <>
@@ -186,7 +186,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               <div className="mt-4 text-center">
                 <button 
                   onClick={() => setMode('forgot')}
-                  className="text-xs text-samarkand hover:underline font-medium"
+                  className="text-xs text-blue-600 hover:underline font-medium"
                 >
                   Parolni unutdingizmi?
                 </button>
@@ -195,24 +195,24 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
             <div className="relative my-8">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-100 dark:border-white/10"></div>
+                <div className="w-full border-t border-slate-100 dark:border-white/10"></div>
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white dark:bg-zinc-900 px-4 text-gray-400 font-bold tracking-widest">Yoki</span>
+                <span className="bg-white dark:bg-[#111827] px-4 text-slate-400 font-bold tracking-widest">Yoki</span>
               </div>
             </div>
 
             <button
               onClick={handleGoogleLogin}
               disabled={loading}
-              className="w-full py-4 bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 rounded-2xl text-sm font-bold dark:text-white flex items-center justify-center gap-3 hover:bg-gray-100 dark:hover:bg-white/10 transition-colors"
+              className="w-full py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm font-bold dark:text-slate-200 flex items-center justify-center gap-3 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors"
             >
-              <Chrome className="w-5 h-5 text-samarkand" />
+              <Chrome className="w-5 h-5 text-blue-600" />
               Google orqali kirish
             </button>
 
             <div className="mt-8 text-center">
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-slate-500 dark:text-slate-400">
                 {mode === 'login' ? 'Hisobingiz yo\'qmi?' : 'Hisobingiz bormi?'}
                 <button
                   onClick={() => {
@@ -220,7 +220,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                     setError(null);
                     setMessage(null);
                   }}
-                  className="ml-2 text-samarkand font-bold hover:underline"
+                  className="ml-2 text-blue-600 font-bold hover:underline"
                 >
                   {mode === 'login' ? 'Ro\'yxatdan o\'tish' : 'Kirish'}
                 </button>

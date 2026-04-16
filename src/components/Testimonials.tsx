@@ -28,13 +28,13 @@ const TESTIMONIALS = [
 
 export default function Testimonials() {
   return (
-    <section className="py-24 bg-gray-50 dark:bg-zinc-950 overflow-hidden">
+    <section className="py-24 bg-slate-50 dark:bg-[#0B1220] overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold dark:text-white mb-4">
-            Sayohatlarimiz haqida <span className="text-samarkand italic">fikrlar</span>
+          <h2 className="text-4xl md:text-5xl font-serif font-bold dark:text-slate-50 mb-4">
+            Sayohatlarimiz haqida <span className="text-blue-600 italic">fikrlar</span>
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
             Minglab baxtli sayohatchilar va hamkorlarimizning samimiy e'tiroflari.
           </p>
         </div>
@@ -47,22 +47,22 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white dark:bg-zinc-900 p-8 rounded-[2.5rem] border border-gray-100 dark:border-white/10 shadow-sm relative"
+              className="bg-white dark:bg-[#111827] p-8 rounded-[2.5rem] border border-slate-200 dark:border-white/5 shadow-sm relative"
             >
-              <Quote className="absolute top-8 right-8 w-12 h-12 text-samarkand/5" />
+              <Quote className="absolute top-8 right-8 w-12 h-12 text-blue-600/5" />
               <div className="flex gap-1 mb-6">
                 {[...Array(t.rating)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 text-yellow-500 fill-current" />
                 ))}
               </div>
-              <p className="text-gray-600 dark:text-gray-300 mb-8 italic leading-relaxed">
+              <p className="text-slate-600 dark:text-slate-300 mb-8 italic leading-relaxed">
                 "{t.text}"
               </p>
               <div className="flex items-center gap-4">
                 <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full object-cover" referrerPolicy="no-referrer" />
                 <div>
-                  <h4 className="font-bold dark:text-white text-sm">{t.name}</h4>
-                  <p className="text-gray-500 text-xs">{t.role}</p>
+                  <h4 className="font-bold dark:text-slate-50 text-sm">{t.name}</h4>
+                  <p className="text-slate-500 text-xs">{t.role}</p>
                 </div>
               </div>
             </motion.div>

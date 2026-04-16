@@ -23,13 +23,13 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-4">
-      <div className="max-w-7xl mx-auto glass rounded-2xl px-6 py-3 flex items-center justify-between shadow-xl shadow-black/5">
+      <div className="max-w-7xl mx-auto glass rounded-2xl px-6 py-3 flex items-center justify-between shadow-lg shadow-black/5">
         <Link to="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 silk-gradient rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
             <span className="text-white font-serif font-bold text-xl">U</span>
           </div>
-          <span className="font-serif font-bold text-lg tracking-tight hidden sm:block dark:text-white">
-            Uzbekistan <span className="text-samarkand">Heritage</span>
+          <span className="font-serif font-bold text-lg tracking-tight hidden sm:block dark:text-slate-50">
+            Uzbekistan <span className="text-blue-600">Heritage</span>
           </span>
         </Link>
 
@@ -38,7 +38,7 @@ export default function Navbar() {
             <a
               key={item.name}
               href={item.href}
-              className="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-white/60 hover:text-samarkand dark:hover:text-silk transition-colors"
+              className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
               <item.icon className="w-4 h-4" />
               {item.name}

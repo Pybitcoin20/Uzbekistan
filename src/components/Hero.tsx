@@ -29,7 +29,7 @@ export default function Hero() {
           y: [0, -30, 0]
         }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute top-1/4 -left-20 w-96 h-96 bg-samarkand/10 blur-3xl rounded-full" 
+        className="absolute top-1/4 -left-20 w-96 h-96 bg-blue-600/10 blur-3xl rounded-full" 
       />
       <motion.div 
         animate={{ 
@@ -38,7 +38,7 @@ export default function Hero() {
           y: [0, 60, 0]
         }}
         transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-silk/10 blur-3xl rounded-full" 
+        className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-blue-400/10 blur-3xl rounded-full" 
       />
 
       <div className="container mx-auto px-6 relative z-10">
@@ -48,14 +48,14 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-samarkand/5 text-samarkand text-xs font-bold tracking-widest uppercase mb-6 border border-samarkand/10">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-bold tracking-widest uppercase mb-6 border border-blue-500/20">
               {t('modern_silk_road')}
             </span>
-            <h1 className="text-6xl md:text-8xl font-serif font-bold mb-8 leading-[0.9] tracking-tighter dark:text-white">
+            <h1 className="text-6xl md:text-8xl font-serif font-bold mb-8 leading-[0.9] tracking-tighter dark:text-slate-50">
               {t('welcome')} <br />
-              <span className="text-samarkand italic">Uzbekistan</span>
+              <span className="text-blue-600 italic">Uzbekistan</span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
               {t('discover_uzbekistan')}
             </p>
 
@@ -96,16 +96,16 @@ export default function Hero() {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="relative max-w-2xl mx-auto"
           >
-            <div className="glass p-2 rounded-3xl flex items-center shadow-2xl shadow-samarkand/10">
+            <div className="glass p-2 rounded-3xl flex items-center shadow-2xl shadow-blue-500/10">
               <div className="flex-1 flex items-center px-4 gap-3">
-                <Search className="w-5 h-5 text-samarkand" />
+                <Search className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 <input 
                   type="text" 
                   placeholder={t('search_placeholder')}
-                  className="w-full bg-transparent py-4 text-sm focus:outline-none font-medium"
+                  className="w-full bg-transparent py-4 text-sm focus:outline-none font-medium dark:text-slate-200"
                 />
               </div>
-              <button className="silk-gradient text-white px-8 py-4 rounded-2xl font-bold text-sm flex items-center gap-2 hover:scale-[1.02] transition-transform active:scale-95">
+              <button className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold text-sm flex items-center gap-2 hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20">
                 {t('explore')}
                 <ArrowRight className="w-4 h-4" />
               </button>
@@ -116,7 +116,7 @@ export default function Hero() {
               <button 
                 onClick={handleGetRec}
                 disabled={loadingRec}
-                className="group relative px-6 py-3 rounded-2xl bg-white dark:bg-zinc-900 border border-samarkand/20 text-samarkand text-xs font-bold uppercase tracking-widest flex items-center gap-2 mx-auto hover:bg-samarkand hover:text-white transition-all shadow-lg"
+                className="group relative px-6 py-3 rounded-2xl bg-white dark:bg-[#111827] border border-slate-200 dark:border-white/10 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-widest flex items-center gap-2 mx-auto hover:bg-slate-50 dark:hover:bg-white/5 transition-all shadow-sm"
               >
                 {loadingRec ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
                 Get Smart Recommendation
@@ -128,9 +128,9 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="mt-6 p-4 glass rounded-2xl border-samarkand/10 max-w-md mx-auto"
+                    className="mt-6 p-4 glass rounded-2xl border-slate-200 dark:border-white/10 max-w-md mx-auto"
                   >
-                    <p className="text-sm text-gray-600 dark:text-gray-400 font-light italic">
+                    <p className="text-sm text-slate-600 dark:text-slate-400 font-light italic">
                       "{recommendation}"
                     </p>
                   </motion.div>
@@ -141,7 +141,7 @@ export default function Hero() {
             {/* Quick Suggestions */}
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               {['Registan', 'Itchan Kala', 'Chorsu Bazaar', 'Plov Center'].map((tag) => (
-                <button key={tag} className="px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 text-xs font-medium text-gray-500 dark:text-gray-400 hover:border-samarkand hover:text-samarkand transition-all cursor-pointer">
+                <button key={tag} className="px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-medium text-slate-500 dark:text-slate-400 hover:border-blue-600 dark:hover:border-blue-400 transition-all cursor-pointer">
                   {tag}
                 </button>
               ))}

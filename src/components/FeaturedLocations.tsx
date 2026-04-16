@@ -23,18 +23,18 @@ export default function FeaturedLocations() {
   ];
 
   return (
-    <section id="explore" className="py-24 bg-cotton dark:bg-zinc-950 transition-colors duration-300">
+    <section id="explore" className="py-24 bg-slate-50 dark:bg-[#0B1220] transition-colors duration-300">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-2 text-samarkand font-bold text-xs uppercase tracking-[0.2em] mb-4">
-              <span className="w-8 h-px bg-samarkand" />
+            <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-bold text-xs uppercase tracking-[0.2em] mb-4">
+              <span className="w-8 h-px bg-blue-600 dark:bg-blue-400" />
               {t('explore')}
             </div>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold leading-tight dark:text-white">
-              Timeless <span className="text-samarkand italic">Heritage</span> Sites
+            <h2 className="text-4xl md:text-5xl font-serif font-bold leading-tight dark:text-slate-50">
+              Timeless <span className="text-blue-600 italic">Heritage</span> Sites
             </h2>
-            <p className="mt-4 text-gray-500 dark:text-white/40 font-light max-w-lg">
+            <p className="mt-4 text-slate-500 dark:text-slate-400 font-light max-w-lg">
               Explore the most iconic historical monuments, vibrant bazaars, and breathtaking natural wonders of Uzbekistan in stunning 4K detail.
             </p>
           </div>
@@ -47,8 +47,8 @@ export default function FeaturedLocations() {
                 onClick={() => setActiveCategory(cat.id)}
                 className={`px-6 py-3 rounded-2xl text-xs font-bold uppercase tracking-widest transition-all border ${
                   activeCategory === cat.id 
-                    ? 'bg-samarkand text-white border-samarkand shadow-lg shadow-samarkand/20' 
-                    : 'bg-white dark:bg-white/5 text-gray-400 border-gray-100 dark:border-white/10 hover:border-samarkand hover:text-samarkand'
+                    ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-600/20' 
+                    : 'bg-white dark:bg-white/5 text-slate-400 border-slate-200 dark:border-white/10 hover:border-blue-600 dark:hover:border-blue-400'
                 }`}
               >
                 {cat.label}
