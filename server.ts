@@ -3,8 +3,10 @@ import { createServer as createViteServer } from "vite";
 import path from "path";
 import { fileURLToPath } from "url";
 import cookieParser from "cookie-parser";
+import crypto from "crypto";
 import { apiLimiter } from "./server/middleware/security";
 import { initDb } from "./server/init";
+import { csrfProtection } from "./server/middleware/auth";
 
 // Routes
 import locationRoutes from "./server/routes/locationRoutes";
@@ -25,7 +27,24 @@ async function startServer() {
   // Global Middleware
   app.use(express.json());
   app.use(cookieParser());
+  
+  // CSRF Cookie Setter
+  app.use((req, res, next) => {
+    if (!req.cookies['csrf-token']) {
+      const token = crypto.randomBytes(32).toString('hex');
+      res.cookie('csrf-token', token, {
+        httpOnly: false,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict'
+      });
+    }
+    next();
+  });
+
   app.use("/api/", apiLimiter);
+  
+  // Apply CSRF protection to all state-changing API routes
+  app.use("/api", csrfProtection);
 
   // API Routes
   app.get("/api/health", (req, res) => {

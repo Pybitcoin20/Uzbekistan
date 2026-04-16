@@ -11,7 +11,7 @@ interface AuthModalProps {
 type AuthMode = 'login' | 'register' | 'forgot';
 
 export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
-  const { login, register } = useAuth();
+  const { login, register, forgotPassword } = useAuth();
   const [mode, setMode] = useState<AuthMode>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,13 +33,14 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     try {
       if (mode === 'register') {
         await register(email, password, displayName);
-        onClose();
+        // Don't close modal, show verification message
+        setMessage('Ro\'yxatdan o\'tdingiz. Emailingizni tasdiqlang.');
       } else if (mode === 'login') {
         await login(email, password);
         onClose();
       } else if (mode === 'forgot') {
-        // Implement forgot password logic on backend if needed
-        setMessage('Parolni tiklash funksiyasi tez orada qo\'shiladi.');
+        const msg = await forgotPassword(email);
+        setMessage(msg);
       }
     } catch (err: any) {
       setError(err.message);
