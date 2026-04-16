@@ -1,8 +1,10 @@
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Star, MapPin, Heart, ArrowUpRight } from 'lucide-react';
 import { Location } from '../types';
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 interface Props {
   location: Location;
@@ -12,6 +14,16 @@ interface Props {
 
 export default function LocationCard({ location, onSave, isSaved }: Props) {
   const { t } = useTranslation();
+  const { user, openAuthModal } = useAuth();
+
+  const handleAction = (e: React.MouseEvent, action: () => void) => {
+    e.preventDefault();
+    if (!user) {
+      openAuthModal();
+      return;
+    }
+    action();
+  };
 
   const detailsLink = location.id === 'imam-al-bukhari' 
     ? `/locations/imam-al-bukhari` 
@@ -32,10 +44,7 @@ export default function LocationCard({ location, onSave, isSaved }: Props) {
           />
           <div className="absolute top-4 right-4 flex gap-2">
             <button
-              onClick={(e) => {
-                e.preventDefault();
-                onSave?.(location.id);
-              }}
+              onClick={(e) => handleAction(e, () => onSave?.(location.id))}
               className={`p-2 rounded-full backdrop-blur-md transition-all ${
                 isSaved ? 'bg-red-500 text-white' : 'bg-black/20 text-white hover:bg-black/40'
               }`}
@@ -78,13 +87,16 @@ export default function LocationCard({ location, onSave, isSaved }: Props) {
             <span className="text-[10px] uppercase tracking-widest text-gray-400 dark:text-white/30 font-bold">Starting from</span>
             <span className="font-bold text-samarkand dark:text-silk">$45</span>
           </div>
-          <Link 
-            to={detailsLink}
+          <button 
+            onClick={(e) => handleAction(e, () => {
+              // Redirect to booking or details
+              window.location.href = detailsLink;
+            })}
             className="flex items-center gap-1 text-sm font-bold text-samarkand dark:text-silk group-hover:gap-2 transition-all"
           >
             {t('book')}
             <ArrowUpRight className="w-4 h-4" />
-          </Link>
+          </button>
         </div>
       </div>
     </motion.div>

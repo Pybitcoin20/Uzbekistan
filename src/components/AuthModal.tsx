@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  signInWithPopup, 
-  GoogleAuthProvider, 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword,
-  updateProfile,
-  sendPasswordResetEmail
-} from 'firebase/auth';
-import { auth, db } from '../lib/firebase';
-import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
-import { X, Mail, Lock, User, Github, Chrome, ArrowRight, AlertCircle, Loader2 } from 'lucide-react';
+import { X, Mail, Lock, User, Chrome, ArrowRight, AlertCircle, Loader2 } from 'lucide-react';
+import { useAuth } from '../hooks/useAuth';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -20,6 +11,7 @@ interface AuthModalProps {
 type AuthMode = 'login' | 'register' | 'forgot';
 
 export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
+  const { login, register } = useAuth();
   const [mode, setMode] = useState<AuthMode>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,17 +21,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const [message, setMessage] = useState<string | null>(null);
 
   const handleGoogleLogin = async () => {
-    setError(null);
-    setLoading(true);
-    const provider = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(auth, provider);
-      onClose();
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
+    setError('Google login is currently being migrated to custom backend.');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -50,26 +32,14 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
     try {
       if (mode === 'register') {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        await updateProfile(userCredential.user, { displayName });
-        
-        // Manually create Firestore profile to ensure displayName is included
-        await setDoc(doc(db, 'users', userCredential.user.uid), {
-          uid: userCredential.user.uid,
-          displayName,
-          email: userCredential.user.email,
-          photoURL: userCredential.user.photoURL,
-          role: 'user',
-          createdAt: serverTimestamp()
-        });
-        
+        await register(email, password, displayName);
         onClose();
       } else if (mode === 'login') {
-        await signInWithEmailAndPassword(auth, email, password);
+        await login(email, password);
         onClose();
       } else if (mode === 'forgot') {
-        await sendPasswordResetEmail(auth, email);
-        setMessage('Parolni tiklash havolasi emailingizga yuborildi.');
+        // Implement forgot password logic on backend if needed
+        setMessage('Parolni tiklash funksiyasi tez orada qo\'shiladi.');
       }
     } catch (err: any) {
       setError(err.message);

@@ -11,7 +11,7 @@ export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const { user } = useAuth();
 
-  const isAdmin = user?.email === 'crazyaivodeos@gmail.com';
+  const isAdmin = user?.role === 'admin';
 
   const navItems = [
     { name: t('explore'), icon: Compass, href: '/#explore' },

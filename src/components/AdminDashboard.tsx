@@ -23,13 +23,9 @@ export default function AdminDashboard() {
     images: []
   });
 
-  const isAdmin = user?.email === 'crazyaivodeos@gmail.com';
-
   useEffect(() => {
-    if (isAdmin) {
-      fetchLocations();
-    }
-  }, [isAdmin]);
+    fetchLocations();
+  }, []);
 
   async function fetchLocations() {
     try {
@@ -46,7 +42,6 @@ export default function AdminDashboard() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!isAdmin) return;
 
     try {
       if (isEditing) {
@@ -65,7 +60,7 @@ export default function AdminDashboard() {
   }
 
   async function handleDelete(id: string) {
-    if (!isAdmin || !window.confirm("Are you sure you want to delete this location?")) return;
+    if (!window.confirm("Are you sure you want to delete this location?")) return;
     try {
       await deleteDoc(doc(db, 'locations', id));
       fetchLocations();
@@ -93,17 +88,6 @@ export default function AdminDashboard() {
     setFormData(loc);
     setIsEditing(loc.id);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  if (!isAdmin) {
-    return (
-      <div className="min-h-screen flex items-center justify-center p-6">
-        <div className="text-center">
-          <h1 className="text-2xl font-serif font-bold text-red-500 mb-4">Access Denied</h1>
-          <p className="text-gray-500">Only administrators can access this page.</p>
-        </div>
-      </div>
-    );
   }
 
   return (

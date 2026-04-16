@@ -2,22 +2,29 @@ import express from "express";
 import { createServer as createViteServer } from "vite";
 import path from "path";
 import { fileURLToPath } from "url";
+import cookieParser from "cookie-parser";
 import { apiLimiter } from "./server/middleware/security";
+import { initDb } from "./server/init";
 
 // Routes
 import locationRoutes from "./server/routes/locationRoutes";
 import paymentRoutes from "./server/routes/paymentRoutes";
 import plannerRoutes from "./server/routes/plannerRoutes";
+import authRoutes from "./server/routes/authRoutes";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function startServer() {
+  // Initialize DB
+  await initDb();
+
   const app = express();
   const PORT = 3000;
 
   // Global Middleware
   app.use(express.json());
+  app.use(cookieParser());
   app.use("/api/", apiLimiter);
 
   // API Routes
@@ -25,6 +32,7 @@ async function startServer() {
     res.json({ status: "ok", message: "Uzbekistan Heritage API is running" });
   });
 
+  app.use("/api/auth", authRoutes);
   app.use("/api/locations", locationRoutes);
   app.use("/api/payments", paymentRoutes);
   app.use("/api/planner", plannerRoutes);
