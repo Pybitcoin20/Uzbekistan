@@ -8,6 +8,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { Helmet } from 'react-helmet-async';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -42,6 +43,15 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#0B1220] selection:bg-blue-500/20 selection:text-blue-600 transition-colors duration-300">
+      <Helmet>
+        <title>Uzbekistan Heritage | Silk Road Discovery Ecosystem</title>
+        <meta name="description" content="Discover the ancient heart of Asia. Smart travel ecosystem for Uzbekistan heritage, cultural guides, and the ultimate plov radar." />
+        <meta name="keywords" content="Uzbekistan, Travel, Heritage, Samarkand, Bukhara, Khiva, Plov, Silk Road" />
+        <meta property="og:title" content="Uzbekistan Heritage | Silk Road Discovery" />
+        <meta property="og:description" content="Explore ancient monuments and modern culture in the heart of the Silk Road." />
+        <meta property="og:image" content="https://picsum.photos/seed/uzbekistan/1200/630" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-blue-600 z-[60] origin-left"

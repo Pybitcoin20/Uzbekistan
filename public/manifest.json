@@ -1,19 +1,19 @@
 {
   "name": "Uzbekistan Heritage & Smart Travel",
-  "short_name": "UzTravel",
-  "description": "Premium tourism platform for exploring Uzbekistan with smart features.",
+  "short_name": "UzHeritage",
+  "description": "Smart travel ecosystem for uncovering Uzbekistan heritage.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F2F2F2",
-  "theme_color": "#0047AB",
+  "background_color": "#0B1220",
+  "theme_color": "#3B82F6",
   "icons": [
     {
-      "src": "https://picsum.photos/seed/uzbekistan/192/192",
+      "src": "https://picsum.photos/seed/uzbek-icon/192/192",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://picsum.photos/seed/uzbekistan/512/512",
+      "src": "https://picsum.photos/seed/uzbek-icon/512/512",
       "sizes": "512x512",
       "type": "image/png"
     }

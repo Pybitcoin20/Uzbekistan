@@ -15,27 +15,34 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const [mode, setMode] = useState<AuthMode>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [referralCode, setReferralCode] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
   const handleGoogleLogin = async () => {
-    setError('Google login is currently being migrated to custom backend.');
+    setError('Google login is currently being migrated to secure custom backend. Please use email for now.');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setMessage(null);
+
+    if (mode === 'register' && password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
     setLoading(true);
 
     try {
       if (mode === 'register') {
         await register(email, password, displayName, referralCode);
-        // Don't close modal, show verification message
-        setMessage('Ro\'yxatdan o\'tdingiz. Emailingizni tasdiqlang.');
+        setMessage('Welcome to the Heritage! Please verify your email to unlock premium rewards.');
       } else if (mode === 'login') {
         await login(email, password);
         onClose();
@@ -61,63 +68,109 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          className="absolute inset-0 bg-black/60 backdrop-blur-md"
         />
 
-        {/* Modal */}
+        {/* Modal container */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className="relative w-full max-w-md bg-white dark:bg-[#111827] rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-200 dark:border-white/5"
+           initial={{ opacity: 0, scale: 0.95, y: 20 }}
+           animate={{ opacity: 1, scale: 1, y: 0 }}
+           exit={{ opacity: 0, scale: 0.95, y: 20 }}
+           className="relative w-full max-w-xl flex flex-col md:flex-row bg-white dark:bg-[#111827] rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-200 dark:border-white/5"
         >
-          <button 
-            onClick={onClose}
-            className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-slate-400"
-          >
-            <X className="w-5 h-5" />
-          </button>
-
-          <div className="p-8 pt-12">
-            <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-blue-600/20">
-                <span className="text-white font-serif font-bold text-3xl">U</span>
+          {/* Sidebar / Social Proof */}
+          <div className="hidden md:flex flex-col justify-between w-64 bg-blue-600 p-8 text-white relative overflow-hidden">
+            <div className="absolute inset-0 uzbek-pattern opacity-10" />
+            <div className="relative z-10">
+              <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-12">
+                <span className="text-white font-serif font-bold text-2xl">U</span>
               </div>
+              <h3 className="text-2xl font-serif font-bold leading-tight mb-4">
+                Explore the Ancient heart of Asia.
+              </h3>
+              <p className="text-white/80 text-sm font-light">
+                Join 10,000+ travelers uncovering the mysteries of the Silk Road.
+              </p>
+            </div>
+            <div className="relative z-10 pt-8 border-t border-white/10">
+              <div className="flex -space-x-2 mb-4">
+                {[1, 2, 3, 4].map(i => (
+                  <img 
+                    key={i} 
+                    src={`https://picsum.photos/seed/user${i}/100/100`} 
+                    className="w-8 h-8 rounded-full border-2 border-blue-600 object-cover" 
+                    referrerPolicy="no-referrer"
+                  />
+                ))}
+                <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm border-2 border-blue-600 flex items-center justify-center text-[10px] font-bold">
+                  +10k
+                </div>
+              </div>
+              <p className="text-[10px] uppercase tracking-widest font-bold opacity-60 italic">
+                Uzbekistan 🇺🇿 Heritage
+              </p>
+            </div>
+          </div>
+
+          <div className="flex-1 p-8 pt-12 relative overflow-y-auto max-h-[90vh]">
+            <button 
+              onClick={onClose}
+              className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-slate-400 z-20"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Tabs */}
+            {mode !== 'forgot' && (
+              <div className="flex gap-8 mb-8 border-b border-slate-100 dark:border-white/5">
+                {(['login', 'register'] as const).map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => {
+                      setMode(tab);
+                      setError(null);
+                      setMessage(null);
+                    }}
+                    className={`pb-4 text-sm font-bold uppercase tracking-widest transition-all relative ${
+                      mode === tab ? 'text-blue-600' : 'text-slate-400 hover:text-slate-600'
+                    }`}
+                  >
+                    {tab === 'login' ? 'Login' : 'Register'}
+                    {mode === tab && (
+                      <motion.div 
+                        layoutId="auth-tab" 
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600" 
+                      />
+                    )}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            <div className="mb-8">
               <h2 className="text-2xl font-serif font-bold dark:text-slate-50">
-                {mode === 'login' ? 'Xush kelibsiz' : mode === 'register' ? 'Hisob yaratish' : 'Parolni tiklash'}
+                {mode === 'login' ? 'Welcome Back' : mode === 'register' ? 'Join the Journey' : 'Reset Password'}
               </h2>
-              <p className="text-slate-500 dark:text-slate-400 text-sm mt-2">
-                {mode === 'login' ? 'Tizimga kirish uchun ma\'lumotlaringizni kiriting' : 
-                 mode === 'register' ? 'O\'zbekiston bo\'ylab sayohatni biz bilan boshlang' : 
-                 'Emailingizni kiriting va biz sizga havola yuboramiz'}
+              <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
+                {mode === 'login' ? 'Enter your credentials to continue.' : 
+                 mode === 'register' ? 'Create an account to start your adventure.' : 
+                 'Enter your email to receive a reset link.'}
               </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               {mode === 'register' && (
-                <>
-                  <div className="relative">
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                    <input
-                      type="text"
-                      required
-                      placeholder="To'liq ismingiz"
-                      value={displayName}
-                      onChange={(e) => setDisplayName(e.target.value)}
-                      className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
-                    />
-                  </div>
-                  <div className="relative">
-                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                    <input
-                      type="text"
-                      placeholder="Taklif kodi (ixtiyoriy)"
-                      value={referralCode}
-                      onChange={(e) => setReferralCode(e.target.value)}
-                      className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
-                    />
-                  </div>
-                </>
+                <div className="relative">
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                  <input
+                    type="text"
+                    required
+                    placeholder="Full Name"
+                    value={displayName}
+                    onChange={(e) => setDisplayName(e.target.value)}
+                    className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                  />
+                </div>
               )}
 
               <div className="relative">
@@ -125,7 +178,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 <input
                   type="email"
                   required
-                  placeholder="Email manzilingiz"
+                  placeholder="Email Address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
@@ -133,16 +186,65 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               </div>
 
               {mode !== 'forgot' && (
+                <>
+                  <div className="relative">
+                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                    <input
+                      type="password"
+                      required
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                    />
+                  </div>
+                  {mode === 'register' && (
+                    <div className="relative">
+                      <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                      <input
+                        type="password"
+                        required
+                        placeholder="Confirm Password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                      />
+                    </div>
+                  )}
+                </>
+              )}
+
+              {mode === 'register' && (
                 <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                   <input
-                    type="password"
-                    required
-                    placeholder="Parol"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    type="text"
+                    placeholder="Referral Code (Optional)"
+                    value={referralCode}
+                    onChange={(e) => setReferralCode(e.target.value)}
                     className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm dark:text-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                   />
+                </div>
+              )}
+
+              {mode === 'login' && (
+                <div className="flex items-center justify-between px-2">
+                  <label className="flex items-center gap-2 cursor-pointer group">
+                    <input 
+                      type="checkbox" 
+                      checked={rememberMe}
+                      onChange={(e) => setRememberMe(e.target.checked)}
+                      className="w-4 h-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" 
+                    />
+                    <span className="text-xs text-slate-500 dark:text-slate-400 group-hover:text-blue-600 transition-colors">Remember me</span>
+                  </label>
+                  <button 
+                    type="button"
+                    onClick={() => setMode('forgot')}
+                    className="text-xs text-blue-600 hover:underline font-medium"
+                  >
+                    Forgot password?
+                  </button>
                 </div>
               )}
 
@@ -175,30 +277,19 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               >
                 {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : (
                   <>
-                    {mode === 'login' ? 'Kirish' : mode === 'register' ? 'Ro\'yxatdan o\'tish' : 'Yuborish'}
+                    {mode === 'login' ? 'Login' : mode === 'register' ? 'Register Now' : 'Send Reset Link'}
                     <ArrowRight className="w-5 h-5" />
                   </>
                 )}
               </button>
             </form>
 
-            {mode === 'login' && (
-              <div className="mt-4 text-center">
-                <button 
-                  onClick={() => setMode('forgot')}
-                  className="text-xs text-blue-600 hover:underline font-medium"
-                >
-                  Parolni unutdingizmi?
-                </button>
-              </div>
-            )}
-
             <div className="relative my-8">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-slate-100 dark:border-white/10"></div>
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white dark:bg-[#111827] px-4 text-slate-400 font-bold tracking-widest">Yoki</span>
+                <span className="bg-white dark:bg-[#111827] px-4 text-slate-400 font-bold tracking-widest">Or continue with</span>
               </div>
             </div>
 
@@ -208,24 +299,19 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               className="w-full py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm font-bold dark:text-slate-200 flex items-center justify-center gap-3 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors"
             >
               <Chrome className="w-5 h-5 text-blue-600" />
-              Google orqali kirish
+              Continue with Google
             </button>
 
-            <div className="mt-8 text-center">
-              <p className="text-sm text-slate-500 dark:text-slate-400">
-                {mode === 'login' ? 'Hisobingiz yo\'qmi?' : 'Hisobingiz bormi?'}
-                <button
-                  onClick={() => {
-                    setMode(mode === 'login' ? 'register' : 'login');
-                    setError(null);
-                    setMessage(null);
-                  }}
-                  className="ml-2 text-blue-600 font-bold hover:underline"
+            {mode === 'forgot' && (
+              <div className="mt-6 text-center">
+                <button 
+                  onClick={() => setMode('login')}
+                  className="text-xs text-blue-600 hover:underline font-bold"
                 >
-                  {mode === 'login' ? 'Ro\'yxatdan o\'tish' : 'Kirish'}
+                  Back to Login
                 </button>
-              </p>
-            </div>
+              </div>
+            )}
           </div>
         </motion.div>
       </div>

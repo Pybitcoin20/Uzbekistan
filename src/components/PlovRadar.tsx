@@ -58,19 +58,19 @@ export default function PlovRadar() {
               {t('plov_radar')}
             </div>
             <h2 className="text-4xl md:text-5xl font-serif font-bold leading-tight dark:text-slate-50">
-              The Ultimate <span className="text-blue-600 italic">Plov</span> Ranking
+              The Sacred <span className="text-blue-600 italic">Plov</span> Hierarchy
             </h2>
-            <p className="text-slate-500 dark:text-slate-400 mt-4 font-light">
-              Uzbekistan's national dish is an art form. We've ranked the best places based on authenticity, timing, and regional style.
+            <p className="text-slate-500 dark:text-slate-400 mt-4 font-light text-lg">
+              In Uzbekistan, Plov is not just a dish; it is a philosophy, a ritual, and a legacy. Our real-time radar tracks the most authentic hearths across the ancient Silk Road.
             </p>
           </div>
-          <div className="flex gap-2 bg-slate-50 dark:bg-white/5 p-1 rounded-2xl">
+          <div className="flex gap-2 bg-slate-50 dark:bg-white/5 p-1 rounded-2xl border border-slate-100 dark:border-white/5">
             {['All', 'Tashkent', 'Samarkand', 'Bukhara'].map(city => (
               <button 
                 key={city} 
                 onClick={() => setSelectedCity(city)}
-                className={`px-6 py-2 rounded-xl text-sm font-medium transition-all ${
-                  selectedCity === city ? 'bg-white dark:bg-[#111827] shadow-sm text-blue-600 dark:text-blue-400' : 'text-slate-500 dark:text-slate-400 hover:text-blue-600'
+                className={`px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${
+                  selectedCity === city ? 'bg-white dark:bg-[#111827] shadow-lg text-blue-600 dark:text-blue-400' : 'text-slate-400 dark:text-slate-500 hover:text-blue-600'
                 }`}
               >
                 {city}
@@ -79,78 +79,79 @@ export default function PlovRadar() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {filteredPlaces.map((place, index) => (
             <motion.div
               key={place.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
               className="relative group"
             >
-              <div className="absolute -top-4 -left-4 w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white font-serif font-bold text-xl z-20 shadow-lg shadow-blue-600/20">
-                #{index + 1}
+              <div className="absolute -top-5 -left-5 w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white font-serif font-bold text-2xl z-20 shadow-2xl shadow-blue-600/40 transform -rotate-12 group-hover:rotate-0 transition-transform duration-500">
+                {index + 1}
               </div>
 
-              {place.isLive && (
-                <div className="absolute top-4 right-4 z-20 flex items-center gap-2 bg-red-500 text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest animate-pulse">
-                  <div className="w-1.5 h-1.5 bg-white rounded-full" />
-                  Live Status
-                </div>
-              )}
-              
-              <div className="bg-white dark:bg-[#111827] rounded-3xl overflow-hidden border border-slate-200 dark:border-white/5 group-hover:shadow-2xl group-hover:shadow-blue-500/10 transition-all">
-                <div className="aspect-video relative overflow-hidden">
-                  <img src={place.image} alt={place.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerPolicy="no-referrer" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                    <div>
-                      <div className="flex items-center gap-1 text-blue-400 mb-1">
-                        <Trophy className="w-3 h-3 fill-current" />
-                        <span className="text-[10px] font-bold uppercase tracking-widest">Top Rated</span>
-                      </div>
-                      <h3 className="text-white font-serif font-bold text-lg">{place.name}</h3>
+              <div className="bg-white dark:bg-[#111827] rounded-[2.5rem] overflow-hidden border border-slate-100 dark:border-white/5 group-hover:shadow-3xl group-hover:shadow-blue-500/10 transition-all duration-500">
+                <div className="aspect-[4/3] relative overflow-hidden">
+                  <img src={place.image} alt={place.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" referrerPolicy="no-referrer" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  
+                  {place.isLive && (
+                    <div className="absolute top-6 left-6 z-20 flex items-center gap-2 bg-red-600 text-white px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest animate-pulse border border-white/20">
+                      <div className="w-1.5 h-1.5 bg-white rounded-full" />
+                      Live Cauldron
                     </div>
-                    <div className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-lg border border-white/20">
-                      <span className="text-white font-bold text-sm">{place.score}</span>
+                  )}
+
+                  <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+                    <div className="flex-1 mr-4">
+                      <div className="flex items-center gap-2 text-blue-400 mb-2">
+                        <Trophy className="w-3.5 h-3.5 fill-current" />
+                        <span className="text-[10px] font-black uppercase tracking-widest">Heritage Grade</span>
+                      </div>
+                      <h3 className="text-white font-serif font-bold text-2xl leading-tight">{place.name}</h3>
+                    </div>
+                    <div className="bg-white/10 backdrop-blur-xl px-4 py-2 rounded-2xl border border-white/20 shadow-2xl">
+                      <span className="text-white font-black text-lg">{place.score}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <div className="space-y-4">
+                <div className="p-8">
+                  <div className="space-y-6">
                     <div className="flex items-center justify-between text-sm">
-                      <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
-                        <MapPin className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      <div className="flex items-center gap-3 text-slate-500 dark:text-slate-400 font-medium">
+                        <MapPin className="w-4 h-4 text-blue-600" />
                         {place.city}
                       </div>
-                      <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
-                        <Clock className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      <div className="flex items-center gap-3 text-slate-500 dark:text-slate-400 font-medium">
+                        <Clock className="w-4 h-4 text-blue-600" />
                         {place.bestTime}
                       </div>
                     </div>
                     
-                    <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-white/5">
+                    <div className="grid grid-cols-2 gap-4 pt-6 border-t border-slate-50 dark:border-white/5">
                       <div>
-                        <span className="text-[10px] uppercase tracking-widest text-slate-400 dark:text-slate-500 font-bold block mb-1">Status</span>
+                        <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold block mb-1 italic">Vibe Check</span>
                         <p className={`font-bold text-sm ${
-                          place.status === 'Ready Now' ? 'text-green-600' : 
-                          place.status === 'Sold Out' ? 'text-red-500' : 'text-blue-600 dark:text-blue-400'
+                          place.status === 'Ready Now' ? 'text-green-500' : 
+                          place.status === 'Sold Out' ? 'text-red-500' : 'text-blue-600'
                         }`}>{place.status}</p>
                       </div>
                       <div className="text-right">
-                        <span className="text-[10px] uppercase tracking-widest text-slate-400 dark:text-slate-500 font-bold block mb-1">Signature</span>
-                        <p className="font-medium text-slate-800 dark:text-slate-200 text-sm">{place.specialty}</p>
+                        <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold block mb-1 italic">Secret Dish</span>
+                        <p className="font-bold text-slate-800 dark:text-slate-200 text-sm">{place.specialty}</p>
                       </div>
                     </div>
                     
                     <button 
                       onClick={() => setSharingPlace(place)}
-                      className="w-full mt-4 flex items-center justify-center gap-2 py-3 bg-slate-50 hover:bg-slate-100 dark:bg-white/5 dark:hover:bg-white/10 text-slate-600 dark:text-slate-400 rounded-xl text-xs font-bold uppercase tracking-widest transition-colors"
+                      className="w-full mt-4 flex items-center justify-center gap-3 py-4 bg-slate-50 hover:bg-blue-600 dark:bg-white/5 dark:hover:bg-blue-600 text-slate-600 hover:text-white dark:text-slate-400 dark:hover:text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 shadow-sm"
                     >
                       <Share2 className="w-4 h-4" />
-                      Do'stlar bilan ulashish
+                      Share the Legacy
                     </button>
                   </div>
                 </div>

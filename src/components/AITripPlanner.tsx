@@ -35,27 +35,30 @@ export default function AITripPlanner() {
               AI-Powered Planning
             </div>
             <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 dark:text-slate-50">
-              Your Personalized <span className="text-blue-600 italic">Silk Road</span> Journey
+              Your Ethereal <span className="text-blue-600 italic">Silk Road</span> Voyage
             </h2>
-            <p className="text-slate-500 dark:text-slate-400 font-light max-w-2xl mx-auto">
-              Tell us how long you're staying, and our AI concierge will craft a perfect day-by-day itinerary tailored to Uzbekistan's unique rhythm.
+            <p className="text-slate-500 dark:text-slate-400 font-light text-lg max-w-2xl mx-auto leading-relaxed">
+              Design a journey that resonates with your soul. Select your duration, and our AI oracle will weave an intricate tapestry of ancient wonders and modern culture.
             </p>
           </div>
 
-          <div className="glass p-8 rounded-[2.5rem] shadow-2xl shadow-blue-500/5 mb-12">
-            <div className="flex flex-col md:flex-row items-center gap-8">
+          <div className="bg-white dark:bg-[#111827] p-12 rounded-[3.5rem] border border-slate-100 dark:border-white/5 shadow-3xl shadow-blue-500/5 mb-16 relative overflow-hidden group">
+             {/* Background Decoration */}
+             <div className="absolute -top-24 -left-24 w-64 h-64 bg-blue-600/5 blur-[100px] rounded-full group-hover:bg-blue-600/10 transition-all duration-1000" />
+             
+            <div className="relative z-10 flex flex-col md:flex-row items-center gap-12">
               <div className="flex-1 w-full">
-                <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Duration (Days)</label>
+                <label className="block text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 mb-6">Voyage Duration</label>
                 <div className="flex items-center gap-4">
                   {[3, 5, 7, 10].map(d => (
                     <button
                       key={d}
                       onClick={() => setDays(d)}
-                      className={`flex-1 py-3 rounded-2xl font-bold text-sm transition-all ${
-                        days === d ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' : 'bg-slate-50 dark:bg-white/5 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/10'
+                      className={`flex-1 py-4 rounded-2xl font-bold text-sm transition-all duration-500 ${
+                        days === d ? 'bg-blue-600 text-white shadow-2xl shadow-blue-600/40 scale-105' : 'bg-slate-50 dark:bg-white/5 text-slate-500 hover:bg-white dark:hover:bg-white/10 hover:shadow-xl'
                       }`}
                     >
-                      {d}
+                      {d} <span className="text-[10px] font-light ml-1 opacity-70">Days</span>
                     </button>
                   ))}
                 </div>
@@ -63,10 +66,10 @@ export default function AITripPlanner() {
               <button
                 onClick={handleGenerate}
                 disabled={loading}
-                className="w-full md:w-auto bg-blue-600 text-white px-12 py-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20 disabled:opacity-50"
+                className="w-full md:w-auto bg-black dark:bg-blue-600 text-white px-14 py-5 rounded-2xl font-bold text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:scale-105 transition-all duration-500 shadow-2xl shadow-blue-600/20 disabled:opacity-50"
               >
-                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
-                Generate Itinerary
+                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Sparkles className="w-5 h-5" />}
+                Weave Itinerary
               </button>
             </div>
           </div>
@@ -74,32 +77,32 @@ export default function AITripPlanner() {
           <AnimatePresence mode="wait">
             {itinerary && (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                className="space-y-6"
+                exit={{ opacity: 0, y: -30 }}
+                className="space-y-10"
               >
                 {itinerary.map((item, idx) => (
                   <motion.div
                     key={item.day}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.1 }}
-                    className="group glass p-8 rounded-3xl hover:bg-white dark:hover:bg-[#111827] transition-all border-none shadow-sm hover:shadow-xl"
+                    transition={{ delay: idx * 0.1, duration: 0.6 }}
+                    className="group bg-white dark:bg-[#111827] p-10 rounded-[3rem] border border-slate-50 dark:border-white/5 shadow-sm hover:shadow-3xl hover:-translate-y-2 transition-all duration-500"
                   >
-                    <div className="flex items-start gap-6">
-                      <div className="w-16 h-16 rounded-2xl bg-blue-600 flex flex-col items-center justify-center text-white shrink-0 shadow-lg shadow-blue-600/20">
-                        <span className="text-[10px] uppercase font-bold opacity-70">Day</span>
-                        <span className="text-2xl font-serif font-bold">{item.day}</span>
+                    <div className="flex flex-col md:flex-row items-start gap-10">
+                      <div className="w-20 h-20 rounded-[1.75rem] bg-blue-600 flex flex-col items-center justify-center text-white shrink-0 shadow-2xl shadow-blue-600/30 group-hover:scale-110 transition-transform duration-500">
+                        <span className="text-[10px] uppercase font-black tracking-widest opacity-60">Day</span>
+                        <span className="text-3xl font-serif font-black">{item.day}</span>
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-serif font-bold mb-4 group-hover:text-blue-600 dark:text-slate-50 transition-colors">
+                        <h3 className="text-2xl font-serif font-bold mb-6 group-hover:text-blue-600 dark:text-slate-50 transition-colors duration-500 leading-tight">
                           {item.title}
                         </h3>
-                        <ul className="space-y-3">
+                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           {item.activities.map((act, i) => (
-                            <li key={i} className="flex items-start gap-3 text-sm text-slate-500 dark:text-slate-400 font-light">
-                              <ChevronRight className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5 shrink-0" />
+                            <li key={i} className="flex items-start gap-4 text-base text-slate-500 dark:text-slate-400 font-light leading-relaxed">
+                              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2.5 shrink-0" />
                               {act}
                             </li>
                           ))}

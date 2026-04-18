@@ -5,7 +5,7 @@ export const ALL_LOCATIONS: Location[] = [
   {
     id: 'registan',
     name: 'Registan Square',
-    description: 'The heart of ancient Samarkand, featuring three magnificent madrasahs: Ulugh Beg, Sher-Dor, and Tilla-Kari. A masterpiece of Islamic architecture.',
+    description: 'The monumental heart of the Silk Road. A majestic intersection of three divine madrasahs—Ulugh Beg, Sher-Dor, and Tilla-Kari—where azure mosaics meet timeless wisdom under the Samarkand sun.',
     category: 'monument',
     city: 'Samarkand',
     lat: 39.6548,
@@ -17,7 +17,7 @@ export const ALL_LOCATIONS: Location[] = [
   {
     id: 'shah-i-zinda',
     name: 'Shah-i-Zinda Necropolis',
-    description: 'The "Tomb of the Living King", a stunning avenue of blue-tiled mausoleums dating back to the 14th-15th centuries.',
+    description: 'The "Tomb of the Living King." An ethereal avenue of cobalt-tiled mausoleums, where every archway whispers secrets of the 14th-century Timurid Renaissance.',
     category: 'monument',
     city: 'Samarkand',
     lat: 39.6631,
@@ -29,7 +29,7 @@ export const ALL_LOCATIONS: Location[] = [
   {
     id: 'gur-e-amir',
     name: 'Gur-e-Amir Mausoleum',
-    description: 'The final resting place of Tamerlane (Amir Timur). Its azure dome and intricate gold interior are legendary.',
+    description: 'The final sanctuary of the Great Conqueror, Tamerlane. Its mesmerizing azure fluted dome and jade-inlaid interiors stand as a pinnacle of Persian-Central Asian architectural harmony.',
     category: 'monument',
     city: 'Samarkand',
     lat: 39.6483,
@@ -41,7 +41,7 @@ export const ALL_LOCATIONS: Location[] = [
   {
     id: 'imam-al-bukhari',
     name: 'Imam Al-Bukhari Complex',
-    description: 'A major pilgrimage site dedicated to the famous Hadith scholar. A symbol of spiritual heritage.',
+    description: 'A sacred lighthouse of spiritual enlightenment. This masterfully restored complex honors the legacy of the legendary scholar with intricate woodcarvings and serene courtyards.',
     category: 'monument',
     city: 'Samarkand',
     lat: 39.8122,
@@ -55,7 +55,7 @@ export const ALL_LOCATIONS: Location[] = [
   {
     id: 'poi-kalyan',
     name: 'Po-i-Kalyan Complex',
-    description: 'The spiritual heart of Bukhara, including the Kalyan Minaret, Kalyan Mosque, and Mir-i-Arab Madrasah.',
+    description: 'Bukhara’s architectural crown jewel. Dominated by the Kalyan Minaret—so magnificent that Genghis Khan himself ordered it spared—it remains a living museum of Islamic devotion.',
     category: 'monument',
     city: 'Bukhara',
     lat: 39.7756,
@@ -67,7 +67,7 @@ export const ALL_LOCATIONS: Location[] = [
   {
     id: 'ark-bukhara',
     name: 'Ark of Bukhara',
-    description: 'A massive fortress that served as the residence of the Emirs of Bukhara for centuries.',
+    description: 'A colossal earthen fortress that protected the Emirs of Bukhara for over a millennium. Its towering walls encompass a city within a city, steeped in power and intrigue.',
     category: 'monument',
     city: 'Bukhara',
     lat: 39.7778,
@@ -79,7 +79,7 @@ export const ALL_LOCATIONS: Location[] = [
   {
     id: 'chor-minor',
     name: 'Chor Minor',
-    description: 'A unique madrasah with four distinct towers, each representing a different religious philosophy.',
+    description: 'The "Four Minarets"—a petite yet profound madrasah featuring four blue-capped towers, each echoing a distinct philosophical pillar of the ancient Silk Road.',
     category: 'monument',
     city: 'Bukhara',
     lat: 39.7749,
@@ -93,7 +93,7 @@ export const ALL_LOCATIONS: Location[] = [
   {
     id: 'itchan-kala',
     name: 'Itchan Kala',
-    description: 'The walled inner city of Khiva, an open-air museum preserved exactly as it was in ancient times.',
+    description: 'A living portal to the Middle Ages. Khiva’s walled inner city is an unparalleled open-air museum where history is felt in every narrow alley and sunrise shadow.',
     category: 'monument',
     city: 'Khiva',
     lat: 41.3783,
@@ -105,7 +105,7 @@ export const ALL_LOCATIONS: Location[] = [
   {
     id: 'kalta-minor',
     name: 'Kalta Minor Minaret',
-    description: 'The iconic unfinished blue minaret of Khiva, intended to be the tallest in the Islamic world.',
+    description: 'An unfinished turquoise dream. Clad in vibrant majolica, this stump-like minaret is Khiva’s most recognizable icon, intended to be seen from the far-off deserts.',
     category: 'monument',
     city: 'Khiva',
     lat: 41.3778,
@@ -119,7 +119,7 @@ export const ALL_LOCATIONS: Location[] = [
   {
     id: 'chorsu',
     name: 'Chorsu Bazaar',
-    description: 'The vibrant heart of Tashkent. A massive blue-domed market where the Silk Road spirit lives on.',
+    description: 'The pulsating heart of the modern capital. Beneath its sprawling azure dome lies a sensory explosion of spices, silk, and the authentic spirit of oriental trade.',
     category: 'bazaar',
     city: 'Tashkent',
     lat: 41.3269,
@@ -131,7 +131,7 @@ export const ALL_LOCATIONS: Location[] = [
   {
     id: 'khazrati-imam',
     name: 'Khazrati Imam Complex',
-    description: 'The religious center of Tashkent, housing the world\'s oldest Quran (the Uthman Quran).',
+    description: 'A sanctuary of sacred knowledge, guarding the world’s oldest Quran. A serene landscape of architectural grace and deep spiritual heritage in the heart of Tashkent.',
     category: 'monument',
     city: 'Tashkent',
     lat: 41.3384,
@@ -145,7 +145,7 @@ export const ALL_LOCATIONS: Location[] = [
   {
     id: 'ak-saray',
     name: 'Ak-Saray Palace',
-    description: 'The ruins of Tamerlane\'s summer palace. Even in ruins, its scale and tilework are breathtaking.',
+    description: 'The colossal ruins of Timur’s "White Palace." Its remaining mosaic-clad pylons testify to an era when art was as vast as the emperor’s ambition.',
     category: 'monument',
     city: 'Shakhrisabz',
     lat: 39.0602,
@@ -159,7 +159,7 @@ export const ALL_LOCATIONS: Location[] = [
   {
     id: 'chimgan',
     name: 'Chimgan Mountains',
-    description: 'The "Uzbek Switzerland". A paradise for hikers in summer and skiers in winter.',
+    description: 'The "Uzbek Switzerland." A pristine alpine escape where snow-capped peaks meet verdant valleys, offering an emerald contrast to the silk-road deserts.',
     category: 'nature',
     city: 'Tashkent Region',
     lat: 41.5205,
@@ -171,7 +171,7 @@ export const ALL_LOCATIONS: Location[] = [
   {
     id: 'aral-sea',
     name: 'Muynak Ship Graveyard',
-    description: 'A haunting reminder of the Aral Sea disaster. Rusting ships in the middle of a desert.',
+    description: 'A haunting desert of rusted metal and vanished waves. The graveyard of ships stands as a powerful testament to the fragile balance of nature and history.',
     category: 'nature',
     city: 'Karakalpakstan',
     lat: 43.7667,
